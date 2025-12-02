@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}A teapot. Not a coffee machine{% endblock %}
+{% block content %}
+<h1 class="text-center text-white">Teapot</h1>
+<div class="d-flex justify-content-center">
+    <input type="text" class="form-control w-50" id="drink-kind" placeholder="What do you want to drink?"/>
+</div>
+<p class="text-center text-white">Click the teapot to drink</p>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <button class="btn" id="teapot-button" onclick="teapotRequest()">
+        <span style="font-size: 10vw" id="teapot-text">🫖</span>
+    </button>
+</div>
+<script>
+    const teapotButton = document.querySelector("#teapot-button");
+    const teapotText = document.querySelector("#teapot-text");
+    const drinkKind = document.querySelector("input#drink-kind");
+
+    function teapotRequest() {
+        let drink = drinkKind.value;
+        fetch(`/api/teapot/${drink}`).then((res) => {
+            if (!res.ok) {
+                alert(res.statusText);
+                throw Error(res.statusText);
+            }
+            return res.json();
+        }).then((json) => {
+            teapotText.textContent = json["content"];
+            setTimeout(() => {
+                teapotText.textContent = "🫖";
+            }, 1000);
+        })
+    }
+</script>
+{% endblock %}
