@@ -7,7 +7,8 @@ DRINKS = {
     "wine": "🍷",
     "juice": "🧃",
     "beer": "🍺",
-    "tapioca": "🧋"
+    "tapioca": "🧋",
+    "milk": "🥛",
 }
 
 @app.route('/')
