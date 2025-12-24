@@ -20,10 +20,7 @@ def api_teapot(drink: str):
     if drink == "coffee":
         abort(418)
     
-    if (emoji := DRINKS.get(drink)):
-        return jsonify({"content": emoji})
-
-    abort(404)
+    return jsonify({"content": DRINKS.get(drink, "🥤")})
 
 if __name__ == "__main__":
     app.run(debug=True)
